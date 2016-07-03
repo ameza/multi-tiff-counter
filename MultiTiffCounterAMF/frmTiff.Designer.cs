@@ -41,6 +41,9 @@
             this.txtTotalPages = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.chkJustName = new System.Windows.Forms.CheckBox();
+            this.chkFolder = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // folderBrowserDialog
@@ -142,12 +145,47 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // chkJustName
+            // 
+            this.chkJustName.AutoSize = true;
+            this.chkJustName.Checked = true;
+            this.chkJustName.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkJustName.Location = new System.Drawing.Point(714, 37);
+            this.chkJustName.Name = "chkJustName";
+            this.chkJustName.Size = new System.Drawing.Size(116, 17);
+            this.chkJustName.TabIndex = 10;
+            this.chkJustName.Text = "Just Names Report";
+            this.chkJustName.UseVisualStyleBackColor = true;
+            // 
+            // chkFolder
+            // 
+            this.chkFolder.AutoSize = true;
+            this.chkFolder.Location = new System.Drawing.Point(714, 61);
+            this.chkFolder.Name = "chkFolder";
+            this.chkFolder.Size = new System.Drawing.Size(90, 17);
+            this.chkFolder.TabIndex = 11;
+            this.chkFolder.Text = "Folder Report";
+            this.chkFolder.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(643, 453);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(261, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Folder Report might not be accurate beyond one level";
+            // 
             // frmTiff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(916, 475);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.chkFolder);
+            this.Controls.Add(this.chkJustName);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.txtTotalPages);
             this.Controls.Add(this.label3);
@@ -162,7 +200,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmTiff";
-            this.Text = "Multi-Tiff File Counter ";
+            this.Text = "Multi-Tiff File Counter  v3.0";
             this.Load += new System.EventHandler(this.frmTiff_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -183,6 +221,9 @@
         private System.Windows.Forms.Label txtTotalPages;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox chkJustName;
+        private System.Windows.Forms.CheckBox chkFolder;
+        private System.Windows.Forms.Label label4;
     }
 }
 

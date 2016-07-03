@@ -63,6 +63,9 @@ namespace MultiTiffCounterAMF
                                      MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
+                txtTotalPages.Text = "0";
+                lstResultados.Clear();
+                CurrentList.Clear();
                 saveFileDialog1.InitialDirectory = txtPath.Text;
                 var now = DateTime.Now;
                 saveFileDialog1.FileName = Path.GetFileName(txtPath.Text)+"_"+String.Format("{0}_{1}_{2}-{3}_{4}_{5}.csv",now.Day,now.Month,now.Year,now.Hour,now.Minute,now.Second);
@@ -126,11 +129,43 @@ namespace MultiTiffCounterAMF
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+
             try
             {
                 var result = this.saveFileDialog1.ShowDialog();
                 if (result != DialogResult.OK) return;
-                WriteCsv(CurrentList, saveFileDialog1.FileName);
+
+                if (chkFolder.Checked)
+                {
+                    var nuevo = CurrentList
+                     .GroupBy(l =>
+                     {
+                         var parent = new DirectoryInfo(l.Path).Parent;
+                         return parent != null ? parent.Name : null;
+                     })
+                     .Select(cl =>
+                     {
+                         var directoryInfo = new DirectoryInfo(cl.First().Path).Parent;
+                         return directoryInfo != null ? new Item(directoryInfo.Name, cl.Sum(c => c.TotalPages)) : null;
+                     }).ToList();
+
+                    WriteCsv(nuevo, saveFileDialog1.FileName.Replace(".csv","_FOLDER.csv"));    
+                }
+
+                if (chkJustName.Checked)
+                {
+                    var temp = CurrentList.Select(item =>
+                    {
+                        var fileName = Path.GetFileName(item.Path);
+                        return fileName != null ? new Item(fileName.Replace(".tif","").Replace(".tiff",""), item.TotalPages) : null;
+                    }).ToList();
+                    WriteCsv(temp, saveFileDialog1.FileName);    
+                }
+                else
+                {
+                   WriteCsv(CurrentList, saveFileDialog1.FileName);    
+                }
+                
                 MessageBox.Show("Saved!!");
             }
             catch (Exception excpt)
